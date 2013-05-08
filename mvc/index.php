@@ -1,7 +1,7 @@
 <?php
 // Session
 session_start();
-
+phpinfo();die;
 // Main app path
 define('APP_PATH', dirname(realpath(__FILE__)) . '/app/');
 

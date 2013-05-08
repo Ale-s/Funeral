@@ -31,6 +31,12 @@ class model_user {
         return FALSE;
     }
 
+    // Return a client with a specifically id
+    public function get_client() {
+        return model_client::load_by_id($this->client_id);
+
+    }
+
 
 
 }
