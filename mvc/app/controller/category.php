@@ -5,6 +5,6 @@
         function action_load() {
             $category = new model_category();
             $result = $category::load_all();
-            @include_once APP_PATH . 'view/category_load.tpl.php';
+            @include_once APP_PATH . 'view/category_view.tpl.php';
         }
     }

@@ -1,8 +1,8 @@
 <?php @include APP_PATH . 'view/snippets/header.tpl.php'; ?>
 
-    <h2>Categorii</h2>
+    <h2>Categories</h2>
     <p>
-    <a href="<?php echo "www.tralala" ?>">
+    <a href="<?php echo "www.com" ?>">
         <?php foreach ($result as $value) {
 
                 echo $value['category_name'] . "<br>";
