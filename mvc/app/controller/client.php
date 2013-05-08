@@ -9,6 +9,6 @@ class controller_client {
         $client = model_client::load_by_id($client);
 
         // Include view for this page
-        @include_once APP_PATH . 'view/client_index.tpl.php';
+        @include_once APP_PATH . 'view/client_view.tpl.php';
     }
 }
