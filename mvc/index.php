@@ -11,7 +11,7 @@ require_once APP_PATH . 'config/config.php';
 define('APP_URL', $config['domain'] . $config['folder']);
 
 // Setup auto-loader
-spl_autoload_register(auto_loader);
+spl_autoload_register('auto_loader');
 function auto_loader($class) {
     if (false !== strpos($class, '_')) {
         $tokens = explode('_', $class);
@@ -26,7 +26,10 @@ $url = $_SERVER['REQUEST_URI'];
 if (0 === strpos($url, $config['folder'])) {
 	$url = substr($url, strlen($config['folder']));
 }
-$url = array_pop(array_reverse(explode('?', $url)));
+
+$parts = explode('?', $url);
+$parts = array_reverse($parts);
+$url = array_pop($parts);
 $url = trim($url, '/');
 $tokens = $url ? explode('/', $url) : array();
 
@@ -73,5 +76,5 @@ if (!method_exists($controller_instance, $action_method)) {
 }
 
 // Go!
-$controller_instance->$action_method($params);
+$controller_instance->$action_method($tokens);
 
