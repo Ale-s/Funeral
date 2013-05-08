@@ -24,4 +24,19 @@
             }
             return FALSE;
         }
+
+        /**
+         * Returns all products by category id.
+         * @param $id
+         * @return mixed
+         */
+        public static function get_products_by_id($id) {
+            $product = new model_product();
+            $result = new model_product();
+            if(($product::load_by_category($id))!=FALSE) {
+                //An array that contains the result of the function "load_by_category()".
+                return $result =$product::load_by_category($id);
+            }
+            return FALSE;
+        }
     }
