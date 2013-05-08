@@ -69,11 +69,11 @@ $controller_instance = new $controller_class;
 
 // Verifies if the action method exists, if doesn't exist then the URL is invalid
 if (!method_exists($controller_instance, $action_method)) {
-	$controller = '404';
-	$controller_class = 'controller_404';
-	$controller_instance = new $controller_class;
-	$action = 'index';
-	$action_method = 'action_index';
+    $controller = '404';
+    $controller_class = 'controller_404';
+    $controller_instance = new $controller_class;
+    $action = 'index';
+    $action_method = 'action_index';
 }
 
 // Go!

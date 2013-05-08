@@ -30,7 +30,7 @@ class model_product {
         if ($result = $db->get_row($sql)) {
             $product = new model_product;
             $product->id = $result['product_id'];
-            $product->category_id = $result['category__id'];
+            $product->category_id = $result['category_id'];
             $product->name = $result['product_name'];
             $product->price = $result['product_price'];
             $product->description = $result['product_description'];
