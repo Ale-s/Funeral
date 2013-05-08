@@ -11,7 +11,7 @@
          * @param $id
          * @return bool|model_category
          */
-        public static function load__by_id($id) {
+        public static function load_by_id($id) {
             $db = model_database::instance();
             $sql = 'SELECT *
   		        FROM category

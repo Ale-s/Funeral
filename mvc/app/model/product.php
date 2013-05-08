@@ -42,4 +42,34 @@ class model_product {
         return FALSE;
     }
 
+    /*
+     * Loads all products by category_id
+     */
+
+    public static function load_by_category_id($category_id){
+        $db = model_database::instance();
+        $sql = 'SELECT *
+                FROM product
+                WHERE category_id = ' . intval($category_id);
+
+        $result[] = array();
+        if ($result = $db->get_rows($sql)) {
+            return $result;
+        }
+        return FALSE;
+    }
+
+
+    /*
+     *
+     */
+
+    public function getCategory($category_id){
+        $result = new model_category();
+        if(($result::load_by_id($category_id))!=FALSE) {
+            return $result =$result::load_by_id($category_id);
+        }
+        return FALSE;
+    }
+
 }
