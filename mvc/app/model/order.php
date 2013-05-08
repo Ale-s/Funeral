@@ -29,6 +29,27 @@ class model_order {
         return FALSE;
     }
 
+    public function get_contract($contract_id) {
+        $contract = new model_contract;
 
+        if(($contract::load_by_id($contract_id))!=FALSE) {
+
+            $contract =$contract::load_by_id($this->contract_id);
+
+            return $contract;
+        }
+        return FALSE;
+    }
+
+    // Returns the orders of a client by a given id.
+    public static function get_orders($id_client) {
+        $db = model_database::instance();
+        $sql = 'SELECT order_id
+                        FROM orders
+                        WHERE client_id = ' .intval($id_client);
+
+        $orders = $db->get_rows($sql);
+        return $orders;
+    }
 
 }
