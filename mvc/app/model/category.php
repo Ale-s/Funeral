@@ -25,6 +25,21 @@
             return FALSE;
         }
 
+        /**Gets all categories.
+         * @return array|bool
+         */
+        public static function load_all() {
+            $db = model_database::instance();
+            $sql = 'SELECT *
+  		            FROM category';
+            $result[] = array();
+            if ($result = $db->get_rows($sql)) {
+                return $result;
+            }
+            return FALSE;
+
+        }
+
         /**
          * Returns all products by category id.
          * @param $id
