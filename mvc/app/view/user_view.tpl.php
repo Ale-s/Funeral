@@ -1,12 +1,10 @@
 <?php @include APP_PATH . 'view/snippets/header.tpl.php'; ?>
 
-<h2> Informatiile despre user: </h2>
-<?php
-    echo
-         'Username :   ' . $user->name . '<br /> ' .
-         'Password :  ' .$user->password. '<br />'.
-         'Type:  '. $user->type. '<br /> ' .
-         'Client id:  '. $user->client_id;
-?>
+<h2> User information: </h2>
+
+    <p>Username: <?php echo $user->name; ?></p>
+    <p>Password: <?php echo $user->password; ?></p>
+    <p>Type: <?php echo $user->type; ?></p>
+    <p>Client id: <?php echo $user->client_id; ?></p>
 
 <?php @include APP_PATH . 'view/snippets/footer.tpl.php';
