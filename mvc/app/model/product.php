@@ -30,7 +30,7 @@ class model_product {
         if ($result = $db->get_row($sql)) {
             $product = new model_product;
             $product->id = $result['product_id'];
-            $product->category_id = $result['category__id'];
+            $product->category_id = $result['category_id'];
             $product->name = $result['product_name'];
             $product->price = $result['product_price'];
             $product->description = $result['product_description'];
@@ -64,7 +64,7 @@ class model_product {
      *
      */
 
-    public function getCategory($category_id){
+    public static function get_category($category_id){
         $result = new model_category();
         if(($result::load_by_id($category_id))!=FALSE) {
             return $result =$result::load_by_id($category_id);
@@ -72,4 +72,15 @@ class model_product {
         return FALSE;
     }
 
+    /*
+     * Add new product.
+     */
+    public static function add_product($name,$description,$price,$amount,$category){
+        $db = model_database::instance();
+        $sql = 'Insert into product (product_name,product_description,product_price,product_amount,category_id)
+                values("' . mysql_real_escape_string($name) . '","' . mysql_real_escape_string($description) . '",'   . intval(mysql_real_escape_string($price)) . ',' . intval(mysql_real_escape_string($amount)) .','. intval($category) .')';
+        $db->execute($sql);
+
+    }
 }
+
