@@ -29,16 +29,9 @@ class model_order {
         return FALSE;
     }
 
-    public function get_contract($contract_id) {
-        $contract = new model_contract;
-
-        if(($contract::load_by_id($contract_id))!=FALSE) {
-
-            $contract =$contract::load_by_id($this->contract_id);
-
-            return $contract;
-        }
-        return FALSE;
+    // Return a contract with an id.
+    public function get_contract() {
+        return model_contract::load_by_id($this->contract_id);
     }
 
     // Returns the orders of a client by a given id.
