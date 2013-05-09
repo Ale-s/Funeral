@@ -14,7 +14,7 @@
         public static function load_by_id($id) {
             $db = model_database::instance();
             $sql = 'SELECT *
-  		        FROM category
+  		            FROM category
 			        WHERE category_id = ' . intval($id);
             if ($result = $db->get_row($sql)) {
                 $category = new model_category;
@@ -24,17 +24,36 @@
             }
             return FALSE;
         }
+        public static function add($name) {
+            $db = model_database::instance();
+            $sql = 'INSERT
+  		            INTO category(category_name)
+			        VALUES("'. mysql_real_escape_string($name) .'")';
+            $result = mysql_query($sql);
+            if (!$result) {
+                return FALSE;
+                die('Invalid query: ' . mysql_error());
+            }
+            return TRUE;
+        }
 
         /**Gets all categories.
          * @return array|bool
          */
         public static function load_all() {
             $db = model_database::instance();
+            $result2[] = array();
             $sql = 'SELECT *
   		            FROM category';
             $result[] = array();
             if ($result = $db->get_rows($sql)) {
-                return $result;
+                foreach($result as $value) {
+                    $category = new model_category();
+                    $category->id =$value['category_id'];
+                    $category->name =$value['category_name'];
+                    array_push($result2, $category);
+                }
+                return $result2;
             }
             return FALSE;
 
