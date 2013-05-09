@@ -17,6 +17,6 @@ class controller_product {
         $products = model_product::load_by_category_id($params[0]);
 
         //Include view for this page.
-        @include_once APP_PATH . 'view/productlistby_category.tpl.php';
+        @include_once APP_PATH . 'view/product_listbycategory.tpl.php';
     }
 }

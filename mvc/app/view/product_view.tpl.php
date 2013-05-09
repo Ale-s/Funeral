@@ -10,6 +10,6 @@
 
     <p>CATEGORY:<?php echo $product->category_id; ?></p>
 
-    <a href = "/Funeral/mvc/category/load">Go to categories page</a>
+    <a href = "<?php echo APP_URL; ?>category/load">Go to categories page</a>
 
 <?php @include APP_PATH . 'view/snippets/footer.tpl.php'; ?>

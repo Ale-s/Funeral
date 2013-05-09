@@ -10,4 +10,10 @@ class controller_order {
         @include_once APP_PATH . 'view/order_view.tpl.php';
 
     }
+
+    function action_list() {
+        $orders = model_order::get_orders();
+
+        @include_once APP_PATH . 'view/order_list.tpl.php';
+    }
 }

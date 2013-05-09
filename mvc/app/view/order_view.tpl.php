@@ -1,8 +1,9 @@
 <?php @include APP_PATH . 'view/snippets/header.tpl.php'; ?>
 
 <h2> Order information : </h2>
-    <p>Order ID: <?php echo $order->id; ?></p>
-    <p>Client ID: <?php echo $order->client_id; ?></p>
-    <p>Contract ID:<a href="<?php APP_PATH ?>/contract/view/ <?php echo $order->contract_id; ?>"><?php echo $order->contract_id; ?></a></p>
+    <li>Order ID: <?php echo $order->id; ?></li>
+    <li>Client ID: <?php echo $order->client_id; ?></li>
+    <li>Contract ID: <?php echo $order->contract_id; ?></li>
+    <a href = "<?php echo APP_URL; ?>order/list/">&laquo;Back</a>
 
 <?php @include APP_PATH . 'view/snippets/footer.tpl.php';

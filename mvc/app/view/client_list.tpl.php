@@ -12,6 +12,6 @@
     </a>
 </li>
 <?php } ?>
-    <a href="/Funeral/mvc/app/view/admin_index.tpl.php">&laquo;Back</a>
+    <a href="<?php echo APP_URL; ?>admin/index/">&laquo;Back</a>
 
 <?php @include APP_PATH . 'view/snippets/footer.tpl.php'; ?>

@@ -34,8 +34,27 @@ class model_order {
         return model_contract::load_by_id($this->contract_id);
     }
 
+    public function get_client() {
+        return model_client::load_by_id($this->client_id);
+    }
+
+    public static function get_orders() {
+        $db = model_database::instance();
+        $sql = 'SELECT * from orders';
+        $orders = array();
+        $result = $db->get_rows($sql);
+        foreach($result as $row) {
+            $order = new model_order();
+            $order->id = $row['order_id'];
+            $order->client_id = $row['client_id'];
+            $order->contract_id = $row['contract_id'];
+            $orders[] = $order;
+        }
+        return $orders;
+    }
+
     // Returns the orders of a client by a given id.
-    public static function get_orders($id_client) {
+    public static function get_orders_by_id($id_client) {
         $db = model_database::instance();
         $sql = 'SELECT order_id
                         FROM orders
