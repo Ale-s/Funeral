@@ -1,9 +1,13 @@
 <?php @include APP_PATH . 'view/snippets/header.tpl.php'; ?>
 
-<h2>Administrare</h2>
+<h2>Administration</h2>
 
-<p>Bine ai venit, <?php echo $admin->name; ?>!</p>
+<p>Welcome,<strong> <?php echo $admin->name; ?> </strong>!</p>
 
-<p>Aici vin optiunile de administrare produse / stoc / comenzi etc</p>
+<div id="admin_choice">
+    <a href="/Funeral/mvc/client/list/" >View clients </a>
+    <br />
+    <a href="#" >View orders </a>
+</div>
 
 <?php @include APP_PATH . 'view/snippets/footer.tpl.php'; ?>

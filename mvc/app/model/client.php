@@ -30,6 +30,18 @@ class model_client {
         return FALSE;
     }
 
+    // Returns all the clients.
+    public static function load_all() {
+        $db = model_database::instance();
+        $sql = 'SELECT *
+  	         FROM client';
+        $result[] = array();
+        if ($result = $db->get_rows($sql)) {
+            return $result;
+        }
+        return FALSE;
+    }
+
     // Delete a client by a given id.
     public static function delete_by_id($client_id) {
         $db = model_database::instance();

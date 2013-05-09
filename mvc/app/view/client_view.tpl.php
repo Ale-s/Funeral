@@ -9,5 +9,6 @@
         <li>Phone:<strong> <?php echo $client->phone; ?></strong></li>
 
     </ul>
+    <a href="/Funeral/mvc/client/list/">&laquo;Back</a>
 
 <?php @include APP_PATH . 'view/snippets/footer.tpl.php'; ?>
