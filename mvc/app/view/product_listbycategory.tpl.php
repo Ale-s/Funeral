@@ -14,6 +14,7 @@
            <?php }
            ?>
 
+    <a href = "/Funeral/mvc/product/addProduct/<?php echo $category->id; ?>">Add a product</a>
 
 </p>
 
