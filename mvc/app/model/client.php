@@ -43,4 +43,23 @@ class model_client {
         model_order::get_orders($this->id);
     }
 
+    /** Creates a client.
+     * @param $name
+     * @param $pin
+     * @param $address
+     * @param $phone
+     * @return bool|model_client
+     */
+    public function create($name,$pin,$address,$phone) {
+        $db = model_database::instance();
+
+        $sql = 'insert into client(client_name,client_pin,client_address,client_phone) values
+                 ("' . mysql_real_escape_string($name) . '","' . mysql_real_escape_string($pin) . '","' . mysql_real_escape_string($address) . '","' . mysql_real_escape_string($phone) . '")';
+
+        if ($db->execute($sql)){
+            return model_client::load_by_id($db->last_insert_id());
+        }
+        return false;
+    }
+
 }

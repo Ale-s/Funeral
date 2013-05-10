@@ -7,8 +7,9 @@ class model_contract {
     var $date;
     var $final_price;
 
-    /**
-     * Loads a contract by ID.
+    /** Loads a contract by id.
+     * @param $id
+     * @return bool|model_contract
      */
     public static function load_by_id($id) {
         $db = model_database::instance();
