@@ -16,7 +16,9 @@
            <?php }
            ?>
 
-    <a href = "<?php echo APP_URL ?>/product/addProduct/<?php echo $category->id; ?>">Add a product</a>
+    <a href = "<?php echo APP_URL ?>/product/addProduct/<?php echo $category->id; ?>">Add a product</a><br />
+    <a href = "<?php echo APP_URL ?>/category/list">Back</a>
+
 
 </p>
 

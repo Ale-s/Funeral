@@ -30,29 +30,61 @@ class model_client {
         return FALSE;
     }
 
-    // Returns all the clients.
+    /**
+     * Loads all the clients.
+     */
     public static function load_all() {
         $db = model_database::instance();
-        $sql = 'SELECT *
-  	         FROM client';
-        $result[] = array();
-        if ($result = $db->get_rows($sql)) {
-            return $result;
+        $sql = 'SELECT * from client';
+        $clients = array();
+        $result = $db->get_rows($sql);
+        foreach($result as $row) {
+            $client = new model_client();
+            $client->id = $row['client_id'];
+            $client->name = $row['client_name'];
+            $client->pin = $row['client_pin'];
+            $client->address = $row['client_address'];
+            $client->phone = $row['client_phone'];
+            $clients[] = $client;
         }
-        return FALSE;
+        return $clients;
     }
 
-    // Delete a client by a given id.
-    public static function delete_by_id($client_id) {
+    /**
+     * Delete a client by id.
+     */
+    public function delete_by_id($id) {
+        $client = model_client::load_by_id($id);
         $db = model_database::instance();
         $sql = 'DELETE FROM client
-                WHERE client_id = ' . intval($client_id);
+                WHERE client_id = ' . intval($id);
         $db->execute($sql);
     }
 
-    // Get the orders for the current client.
+    /**
+     * Get all the orders.
+     */
     public function get_orders() {
         model_order::get_orders($this->id);
+    }
+
+    /** Creates a client.
+     * @param $name
+     * @param $pin
+     * @param $address
+     * @param $phone
+     * @return bool|model_client
+     */
+    public function create($name,$pin,$address,$phone) {
+        $db = model_database::instance();
+
+        $sql = 'insert into client(client_name,client_pin,client_address,client_phone) values
+                 ("' . mysql_real_escape_string($name) . '","' . mysql_real_escape_string($pin) . '","' . mysql_real_escape_string($address) . '","' . mysql_real_escape_string($phone) . '")';
+
+        if ($db->execute($sql)){
+            return model_client::load_by_id($db->last_insert_id());
+        }
+        return false;
     }
 
 }

@@ -30,8 +30,12 @@
     -->
 	<br />
 
+
 	<input type="submit" name="form[action]" value="Add" />
 
-</form>
+    <a href = "<?php echo APP_URL; ?>product/listbycategory/<?php echo $category->id; ?>">Back to the list</a>
+
+
+    </form>
 
 <?php @include APP_PATH . 'view/snippets/footer.tpl.php'; ?>

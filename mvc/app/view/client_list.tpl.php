@@ -1,13 +1,13 @@
 <?php
 ?>
 <h3>Clients List</h3>
-<?php foreach ($clients as $value ) {
-    $id = $value['client_id']; ?>
+<?php foreach ($clients as $client ) {
+    $id = $client->id; ?>
 <li>
 
     <a href=<?php echo "/Funeral/mvc/client/view/" .$id ?>>
         <?php
-            echo $value['client_name'] . "</ br>";
+            echo $client->name . "</ br>";
         ?>
     </a>
 </li>
