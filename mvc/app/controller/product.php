@@ -33,18 +33,18 @@ class controller_product {
 
         if (isset($_POST['form']['action'])) {
             if (!empty($_POST['form']['name']) && !empty($_POST['form']['price'])){
-                if ($product= model_product::add_product($_POST['form']['name'], $_POST['form']['description'],$_POST['form']['price'],$_POST['form']['amount'],$idCategory)){
-                    header('Location: ' . APP_URL . 'product/listbycategory/' . $category->id );
+                if($product = model_product::add_product($_POST['form']['name'], $_POST['form']['description'],$_POST['form']['price'],$_POST['form']['amount'],$idCategory)) {
+                    header('Location: ' . APP_URL . 'product/view/' . $product->id);
                     die;
                 }
-                //header('Location: ' . APP_URL . 'product/listbycategory/' . $category->id );
-                //die;
+                $form_error = TRUE;
+
             }
             $form_error = TRUE;
         }
 
         @include_once APP_PATH . 'view/product_addProduct.tpl.php';
-        }
+    }
 
 
     /**
