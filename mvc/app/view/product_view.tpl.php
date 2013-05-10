@@ -1,6 +1,11 @@
 <?php @include APP_PATH . 'view/snippets/header.tpl.php'; ?>
 
     <h2>PRODUCT NAME: <?php echo $product->name; ?></h2>
+
+    <?php if ($form_error) { ?>
+         <p><em>Eroare.Nu ati reusit sa puneti comanda!</em></p>
+    <?php } ?>
+
     <form action="<?php echo APP_URL; ?>product/view/<?php echo $product->id; ?>" method="post">
 
     <p>DESCRIPTION:<?php echo $product->description; ?></p>
