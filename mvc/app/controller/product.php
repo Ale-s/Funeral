@@ -23,7 +23,6 @@ class controller_product {
     function action_addProduct($params){
         $form_error = FALSE;
         $idCategory = $params[0];
-        $category = new model_category();
         $category = model_category::load_by_id($idCategory);
 
         if (isset($_POST['form']['action'])) {
@@ -36,7 +35,7 @@ class controller_product {
             $form_error = TRUE;
         }
 
-        @include_once APP_PATH . 'view/product_add.tpl.php';
+        @include_once APP_PATH . 'view/product_addProduct.tpl.php';
         }
 
 
@@ -51,7 +50,25 @@ class controller_product {
         }
 
 
-        @include_once APP_PATH . 'view/product_delete.tpl.php';
+        @include_once APP_PATH . 'view/product_deleteProduct.tpl.php';
+    }
+
+    function action_editProduct($params){
+        $form_error = FALSE;
+
+        $product = model_product::load_by_id($params[0]);
+        $category = $product->category_id;
+        $id = $product->id;
+        if (isset($_POST['form']['action'])) {
+            if (!empty($_POST['form']['name']) && !empty($_POST['form']['price'])){
+                $product::edit_product_by_id($id,$_POST['form']['name'], $_POST['form']['description'],$_POST['form']['price'],$_POST['form']['amount']);
+                header('Location: ' . APP_URL . 'product/listbycategory/' . $category );
+                die;
+            }
+            $form_error = TRUE;
+        }
+
+      @include_once APP_PATH . 'view/product_editProduct.tpl.php';
     }
 }
 
