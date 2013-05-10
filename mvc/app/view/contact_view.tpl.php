@@ -1,6 +1,6 @@
 <?php @include APP_PATH . 'view/snippets/header.tpl.php'; ?>
 
-<h2>Contact</h2>
+<h2><a href ="http://localhost/Funeral/mvc">Home</a> Contact</h2>
 <p>
     You can contact us for more information:
     <ul>

@@ -1,6 +1,7 @@
 <?php @include APP_PATH . 'view/snippets/header.tpl.php'; ?>
 
-    <h2><a href ="http://localhost/Funeral/mvc">Home</a></h2> <h2>Categories</h2>
+    <h2><a href ="http://localhost/Funeral/mvc">Home</a> Categories</h2>
+
         <a href="<?php APP_URL ?>add">Add a new category</a><br/>
         <form action="<?php echo APP_URL; ?>category/delete" method="post">
         <?php foreach($result as $category): ?>
