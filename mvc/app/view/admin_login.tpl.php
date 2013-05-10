@@ -6,7 +6,7 @@
 	<p><em>Utilizator sau parola gresita. Reincercati.</em></p>
 <?php endif ?>
 
-<form action="<?php echo APP_URL; ?>admin/login" method=">post"
+<form action="<?php echo APP_URL; ?>admin/login" method="post">
 	<label>Utilizator
 		<input type="text" name="form[user]" value="" />
 	</label>

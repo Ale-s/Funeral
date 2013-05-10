@@ -21,6 +21,8 @@ class model_product {
 
     /**
      * Loads a product by id.
+     * @param $id
+     * @return bool|model_product
      */
     public static function load_by_id($id) {
         $db = model_database::instance();
@@ -30,7 +32,7 @@ class model_product {
         if ($result = $db->get_row($sql)) {
             $product = new model_product;
             $product->id = $result['product_id'];
-            $product->category_id = $result['category__id'];
+            $product->category_id = $result['category_id'];
             $product->name = $result['product_name'];
             $product->price = $result['product_price'];
             $product->description = $result['product_description'];
@@ -42,10 +44,12 @@ class model_product {
         return FALSE;
     }
 
-    /*
-     * Loads all products by category_id
-     */
 
+    /**
+     * Gets all products by category_id.
+     * @param $category_id
+     * @return array|bool
+     */
     public static function load_by_category_id($category_id){
         $db = model_database::instance();
         $sql = 'SELECT *
@@ -60,11 +64,14 @@ class model_product {
     }
 
 
-    /*
-     *
-     */
 
-    public function getCategory($category_id){
+
+
+    /**
+     * @param $category_id
+     * @return bool|model_category
+     */
+    public static function get_category($category_id){
         $result = new model_category();
         if(($result::load_by_id($category_id))!=FALSE) {
             return $result =$result::load_by_id($category_id);
@@ -72,4 +79,51 @@ class model_product {
         return FALSE;
     }
 
+
+    /**
+     * Add a new product.
+     * @param $name
+     * @param $description
+     * @param $price
+     * @param $amount
+     * @param $category
+     * @return bool|model_product
+     */
+    public static function add_product($name,$description,$price,$amount,$category){
+        $db = model_database::instance();
+        $sql = 'Insert into product (product_name,product_description,product_price,product_amount,category_id)
+                values("' . mysql_real_escape_string($name) . '","' . mysql_real_escape_string($description) . '",'   . intval(mysql_real_escape_string($price)) . ',' . intval(mysql_real_escape_string($amount)) .','. intval($category) .')';
+        $db->execute($sql);
+
+        return model_product::load_by_id($db->last_insert_id());
+
+    }
+
+
+
+    /**
+     * Delete a product by id
+     * @param $idProduct
+     */
+    public static function delete_product_by_id($idProduct){
+        $db = model_database::instance();
+        $sql = 'delete from product where product_id = ' .intval($idProduct);
+        $db->execute($sql);
+    }
+
+
+    /**
+     * Edit a product by id.
+     * @param $id
+     * @param $name
+     * @param $description
+     * @param $price
+     * @param $amount
+     */
+    public static function edit_product_by_id($id,$name,$description,$price,$amount){
+        $db = model_database::instance();
+        $sql = 'update product set product_name  = "' . mysql_real_escape_string($name) . '", product_description = "' . mysql_real_escape_string($description) . '",product_price = '   . intval(mysql_real_escape_string($price)) . ',product_amount = ' . intval(mysql_real_escape_string($amount)) .' where product_id = ' . intval($id);
+        $db->execute($sql);
+    }
 }
+

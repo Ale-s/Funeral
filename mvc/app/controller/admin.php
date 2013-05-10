@@ -9,11 +9,11 @@ class controller_admin {
 	 */
 	function action_index($params) {
 
-		// Admin must be logged in to access this page
-		if (!$admin = model_admin::load_by_id($_SESSION['myshop']['admin_user_id'])) {
-			header('Location: ' . APP_URL . 'admin/login');
-			die;
-		}
+//		// Admin must be logged in to access this page
+//		if (!$admin = model_admin::load_by_id($_SESSION['myshop']['admin_user_id'])) {
+//			header('Location: ' . APP_URL . 'admin/login');
+//			die;
+//		}
 
 		// Include view for this page
 		@include_once APP_PATH . 'view/admin_index.tpl.php';
