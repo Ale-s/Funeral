@@ -10,11 +10,13 @@
 
            <p>Price:<?php echo $prods['product_price']; ?></p>
 
+           <a href = "<?php echo APP_URL ?>product/view/<?php echo $prods['product_id']; ?>">View details</a>
+
 
            <?php }
            ?>
 
-    <a href = "/Funeral/mvc/product/addProduct/<?php echo $category->id; ?>">Add a product</a>
+    <a href = "<?php echo APP_URL ?>/product/addProduct/<?php echo $category->id; ?>">Add a product</a>
 
 </p>
 

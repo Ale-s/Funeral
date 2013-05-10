@@ -36,8 +36,23 @@ class controller_product {
             $form_error = TRUE;
         }
 
-        @include_once APP_PATH . 'view/add_product.tpl.php';
+        @include_once APP_PATH . 'view/product_add.tpl.php';
         }
+
+
+    function action_deleteProduct($params){
+         $product = model_product::load_by_id($params[0]);
+         $category = $product->category_id;
+         if (isset($_POST['form']['action'])) {
+            model_product::delete_product_by_id($params[0]);
+            header('Location: ' . APP_URL . 'product/listbycategory/' . $category );
+
+            die;
+        }
+
+
+        @include_once APP_PATH . 'view/product_delete.tpl.php';
+    }
 }
 
 

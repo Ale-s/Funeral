@@ -72,7 +72,7 @@ class model_product {
         return FALSE;
     }
 
-    /*
+    /**
      * Add new product.
      */
     public static function add_product($name,$description,$price,$amount,$category){
@@ -81,6 +81,16 @@ class model_product {
                 values("' . mysql_real_escape_string($name) . '","' . mysql_real_escape_string($description) . '",'   . intval(mysql_real_escape_string($price)) . ',' . intval(mysql_real_escape_string($amount)) .','. intval($category) .')';
         $db->execute($sql);
 
+    }
+
+
+    /**
+     * Delete a product by id.
+     */
+    public static function delete_product_by_id($idProduct){
+        $db = model_database::instance();
+        $sql = 'delete from product where product_id = ' .intval($idProduct);
+        $db->execute($sql);
     }
 }
 
