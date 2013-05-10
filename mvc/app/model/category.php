@@ -60,6 +60,24 @@
 
         }
 
+        /**
+         * Edit a category by id.
+         * @param $id
+         * @param $n
+         * @return bool
+         */
+        public static function editC($id,$n) {
+            $db = model_database::instance();
+            $sql = 'Update category
+			        set category_name = "'. mysql_real_escape_string($n) .'" where category_id ='. intval($id);
+            $result = mysql_query($sql);
+            if (!$result) {
+                return FALSE;
+                die('Invalid query: ' . mysql_error());
+            }
+            return TRUE;
+        }
+
         /**Gets all categories.
          * @return array|bool
          */
