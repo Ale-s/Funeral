@@ -4,7 +4,7 @@
 class controller_contract {
 
 
-    function action_index($params) {
+    function action_view($params) {
         $contract_id = $params[0];
         $contract = model_contract::load_by_id($contract_id);
 
