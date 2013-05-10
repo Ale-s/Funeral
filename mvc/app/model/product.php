@@ -42,7 +42,7 @@ class model_product {
         return FALSE;
     }
 
-    /*
+    /**
      * Loads all products by category_id
      */
 
@@ -80,6 +80,7 @@ class model_product {
         $sql = 'Insert into product (product_name,product_description,product_price,product_amount,category_id)
                 values("' . mysql_real_escape_string($name) . '","' . mysql_real_escape_string($description) . '",'   . intval(mysql_real_escape_string($price)) . ',' . intval(mysql_real_escape_string($amount)) .','. intval($category) .')';
         $db->execute($sql);
+        return model_category::load_by_id($db->last_insert_id());
 
     }
 
@@ -94,7 +95,7 @@ class model_product {
     }
 
     /**
-     * Edit a product.
+     * Edit a product by id.
      */
     public static function edit_product_by_id($id,$name,$description,$price,$amount){
         $db = model_database::instance();

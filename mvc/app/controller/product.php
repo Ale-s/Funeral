@@ -1,7 +1,7 @@
 <?php
 class controller_product {
 
-    /*
+    /**
      * Main product class
      */
     function action_view($params){
@@ -12,6 +12,9 @@ class controller_product {
         @include_once APP_PATH . 'view/product_view.tpl.php';
     }
 
+    /**
+     * Load all products from a category.
+     */
     function action_listbycategory($params){
         $category = model_category::load_by_id($params[0]);
         $products = model_product::load_by_category_id($params[0]);
@@ -20,6 +23,9 @@ class controller_product {
         @include_once APP_PATH . 'view/product_listbycategory.tpl.php';
     }
 
+    /**
+     * Add a new product.
+     */
     function action_addProduct($params){
         $form_error = FALSE;
         $idCategory = $params[0];
@@ -27,10 +33,12 @@ class controller_product {
 
         if (isset($_POST['form']['action'])) {
             if (!empty($_POST['form']['name']) && !empty($_POST['form']['price'])){
-                $product=new model_product();
-                $product::add_product($_POST['form']['name'], $_POST['form']['description'],$_POST['form']['price'],$_POST['form']['amount'],$idCategory);
-                header('Location: ' . APP_URL . 'product/listbycategory/' . $category->id );
-                die;
+                if ($product= model_product::add_product($_POST['form']['name'], $_POST['form']['description'],$_POST['form']['price'],$_POST['form']['amount'],$idCategory)){
+                    header('Location: ' . APP_URL . 'product/listbycategory/' . $category->id );
+                    die;
+                }
+                //header('Location: ' . APP_URL . 'product/listbycategory/' . $category->id );
+                //die;
             }
             $form_error = TRUE;
         }
@@ -39,6 +47,9 @@ class controller_product {
         }
 
 
+    /**
+     * Delete a product by id.
+     */
     function action_deleteProduct($params){
          $product = model_product::load_by_id($params[0]);
          $category = $product->category_id;
@@ -53,6 +64,10 @@ class controller_product {
         @include_once APP_PATH . 'view/product_deleteProduct.tpl.php';
     }
 
+
+    /**
+     * Edit a product by id.
+     */
     function action_editProduct($params){
         $form_error = FALSE;
 
