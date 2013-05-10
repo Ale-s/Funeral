@@ -19,7 +19,7 @@
 
         <a href = "<?php echo APP_URL; ?>user/register/">Not registred yet?</a>
         <br />
-        <a href = "<?php echo APP_URL; ?>"
+        <a href = "<?php echo APP_URL; ?>">Home</a>
 
 
     </form>
