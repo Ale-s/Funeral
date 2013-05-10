@@ -1,6 +1,7 @@
 <?php @include APP_PATH . 'view/snippets/header.tpl.php'; ?>
 
 <h2>Your shopping cart :</h2>
+<form action="<?php echo APP_URL; ?>cart/deleteProduct/" method="post">
 <table border = 2>
     <?php
         $total_price = 0;
@@ -14,11 +15,14 @@
            <td>Quantity: <?php echo $quantity?></td>
            <td>Price: <?php echo $price?></td>
            <td>
-               <input type ="button" name="form[action]" value = "Delete this product">
+               <input type="hidden" name='form[id]' value='<?php echo $product_id ?>'/>
+               <input type ="submit" name="form[delete]" value = "Delete this product">
+
            </td>
        </tr>
    <?php }
 ?>
+</form>
 </table>
 <h2> Your final price is : <?php echo $total_price ?></h2>
 <a href = "<?php echo APP_URL ?>/home/">Back to home page</a>
