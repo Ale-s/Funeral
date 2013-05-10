@@ -2,7 +2,7 @@
 
     <h2>Add a new category</h2>
 <?php if ($form_error) : ?>
-    <p><em>Esti o jita!</em></p>
+    <p><em>Error!</em></p>
 <?php endif ?>
 
     <form action="<?php echo APP_URL; ?>category/add" method="post">
