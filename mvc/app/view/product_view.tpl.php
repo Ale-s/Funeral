@@ -1,5 +1,5 @@
 <?php @include APP_PATH . 'view/snippets/header.tpl.php'; ?>
-
+<h1><a href = "<?php echo APP_URL; ?>">HOME</a><br /></h1>
     <h2>PRODUCT NAME: <?php echo $product->name; ?></h2>
 
     <?php if ($form_error) { ?>
