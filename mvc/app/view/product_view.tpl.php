@@ -11,6 +11,7 @@
     <p>CATEGORY:<?php echo $product->category_id; ?></p>
 
 
+     <input type="submit" name="form[action]" value="Add to cart!" />
 
     <a href = "<?php echo APP_URL; ?>product/deleteProduct/<?php echo $product->id?>">Delete this product</a><br />
     <a href = "<?php echo APP_URL; ?>product/editProduct/<?php echo $product->id?>">Edit this product</a><br />
