@@ -11,8 +11,23 @@
             <td> Order <?php echo $index++; ?> : </td>
             <td><a href="<?php echo APP_URL; ?>order/view/<?php echo $order->id ?>"> <?php echo $order->id ?> </a> </td>
             <td> <?php echo $client->name; ?> </td>
-            <td>Aici vine statusul comenzii</td>
+            <td> Status:
+            <?php
+                if ($order->order_status == model_order::NOTVALID) {
+                    echo "not valid";
+                }
+                else if ($order->order_status == model_order::VALID) {
+                    echo "valid";
+                }
+                else if ($order->order_status == model_order::FINALISED) {
+                    echo "finalised";
+                }
+            ?>
+            </td>
+
+
          </tr>
+
 
     <?php } ?>
     </table>
