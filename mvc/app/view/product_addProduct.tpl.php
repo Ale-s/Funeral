@@ -31,7 +31,7 @@
 	<br />
 
 
-	<input type="submit" name="form[action]" value="Add" />
+	<input type="submit" name="action" value="Add to cart" /></ br>
 
     <a href = "<?php echo APP_URL; ?>product/listbycategory/<?php echo $category->id; ?>">Back to the list</a>
 

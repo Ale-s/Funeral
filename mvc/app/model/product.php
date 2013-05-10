@@ -125,5 +125,6 @@ class model_product {
         $sql = 'update product set product_name  = "' . mysql_real_escape_string($name) . '", product_description = "' . mysql_real_escape_string($description) . '",product_price = '   . intval(mysql_real_escape_string($price)) . ',product_amount = ' . intval(mysql_real_escape_string($amount)) .' where product_id = ' . intval($id);
         $db->execute($sql);
     }
+
 }
 
