@@ -15,15 +15,16 @@
            <td>Quantity: <?php echo $quantity?></td>
            <td>Price: <?php echo $price?></td>
            <td>
-               <input type="hidden" name='form[id]' value='<?php echo $product_id ?>'/>
                <input type ="submit" name="form[delete]" value = "Delete this product">
-
+               <input type="hidden" name='form[id]' value='<?php echo $product_id ?>'/>
+               <input type="hidden" name='form[quantity]' value='<?php echo $quantity ?>' />
            </td>
        </tr>
    <?php }
 ?>
-</form>
 </table>
+</form>
+
 <h2> Your final price is : <?php echo $total_price ?></h2>
-<a href = "<?php echo APP_URL ?>/home/">Back to home page</a>
+<a href = "<?php echo APP_URL ?>home/">Back to home page</a>
 <?php @include APP_PATH . 'view/snippets/footer.tpl.php'; ?>

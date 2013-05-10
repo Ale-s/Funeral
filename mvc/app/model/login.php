@@ -15,4 +15,14 @@ public static function validate($username, $password) {
     }
     return FALSE;
 }
+
+ public static function get_users_number($username) {
+     $db = model_database::instance();
+     $sql = "SELECT COUNT(*)
+             FROM user
+             WHERE user_name = '" . $username . "'";
+     $result = $db->get_row($sql);
+
+     return $result;
+ }
 }

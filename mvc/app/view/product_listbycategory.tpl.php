@@ -1,4 +1,5 @@
 <?php @include APP_PATH . 'view/snippets/header.tpl.php'; ?>
+<h1><a href = "<?php echo APP_URL; ?>">HOME</a><br /></h1>
 
 <h2>View products from  <?php echo $category->name; ?></h2>
 
