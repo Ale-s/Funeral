@@ -56,16 +56,19 @@
             $form_error =false;
             $category= model_category::load_by_id($params[0]);
             $id =$params[0];
-            if(isset($_POST['form']['action'])) {
+            if(isset($_POST['form']['action1'])) {
                 //Check if the "Ok" button is set.
-                if($_POST['form']['action']['value'] == "Ok") {
+
                     //Modify category name.
                     if( model_category::editC($id,$_POST['form']['name'])){
                         header('Location: ' . APP_URL . 'category/list');
                         die;
-                    }
+
                 }
             $form_error =false;
+            }
+            if(isset($_POST['form']['action2'])) {
+                @include_once APP_PATH . 'view/category_edit.tpl.php';
             }
             @include_once APP_PATH . 'view/category_edit.tpl.php';
         }

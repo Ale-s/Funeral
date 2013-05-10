@@ -9,8 +9,8 @@
             <input type="text" name="form[name]" value="<?php echo $category->name; ?>" />
         </label>
         <br />
-        <input type="submit" name="form[action]" value="Ok" />
-        <input type="submit" name="form[action]" value="Cancel" />
+        <input type="submit" name="form[action1]" value="Ok" />
+        <input type="submit" name="form[action2]" value="Cancel" />
         </p>
     <a href = "<?php echo APP_URL; ?>category/list">Back</a><br />
     </form>
