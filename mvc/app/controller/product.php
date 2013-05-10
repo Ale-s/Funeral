@@ -7,9 +7,28 @@ class controller_product {
     function action_view($params){
         $prod = $params[0];
         $product = model_product::load_by_id($prod);
+        $form_error = FALSE;
 
-        // Include view for this page.
-        @include_once APP_PATH . 'view/product_view.tpl.php';
+
+        if (isset ($_POST['form']['action'])){
+           if ($product->amount >= $_POST['form']['amount']){
+               $_SESSION['cart'][$product->id] = $_POST['form']['amount'];
+               $quantity = $product->amount - $_POST['form']['amount'];
+               $product::edit_product_by_id($product->id,$product->name,$product->description,$product->price,$quantity);
+               // Include view for this page.
+               @include_once APP_PATH . 'view/cart_view.tpl.php';
+           }
+            else{
+                $form_error = TRUE;
+                @include_once APP_PATH . 'view/product_view.tpl.php';
+
+            }
+        }
+        else{
+            // Include view for this page.
+            @include_once APP_PATH . 'view/product_view.tpl.php';
+        }
+
     }
 
     /**
@@ -18,6 +37,7 @@ class controller_product {
     function action_listbycategory($params){
         $category = model_category::load_by_id($params[0]);
         $products = model_product::load_by_category_id($params[0]);
+
 
         //Include view for this page.
         @include_once APP_PATH . 'view/product_listbycategory.tpl.php';
@@ -43,6 +63,7 @@ class controller_product {
             $form_error = TRUE;
         }
 
+        //Include view for this page.
         @include_once APP_PATH . 'view/product_addProduct.tpl.php';
     }
 
@@ -60,7 +81,7 @@ class controller_product {
             die;
         }
 
-
+        //Include view for this page.
         @include_once APP_PATH . 'view/product_deleteProduct.tpl.php';
     }
 
@@ -83,7 +104,8 @@ class controller_product {
             $form_error = TRUE;
         }
 
-      @include_once APP_PATH . 'view/product_editProduct.tpl.php';
+        //Include view for this page.
+        @include_once APP_PATH . 'view/product_editProduct.tpl.php';
     }
 }
 
