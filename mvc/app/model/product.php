@@ -126,5 +126,9 @@ class model_product {
         $db->execute($sql);
     }
 
+    public static function get_comments() {
+
+    }
+
 }
 

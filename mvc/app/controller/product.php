@@ -107,6 +107,33 @@ class controller_product {
         //Include view for this page.
         @include_once APP_PATH . 'view/product_editProduct.tpl.php';
     }
+
+    function action_addComment($params) {
+        $forms_error = FALSE;
+        $product = model_product::load_by_id($params[0]);
+
+        $idP = $product->id;
+
+        if (isset($_POST['form']['action'])) {
+            model_comment::add_comment($idP,$_POST['form']['comment']);
+
+                //@include_once APP_PATH . 'view/comment_view.tpl.php';
+            header('Location: ' . APP_URL . 'product/view/' . $idP );
+
+            $forms_error = false;
+
+        }
+        else {
+            $forms_error = true;
+        }
+
+        $comments = model_comment::load_by_product_id($idP);
+
+        @include_once APP_PATH . 'view/product_view.tpl.php';
+    }
+
+
+
 }
 
 

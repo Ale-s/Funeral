@@ -34,5 +34,36 @@
 
     <a href = "<?php echo APP_URL; ?>product/listbycategory/<?php echo $product->category_id?>">Back</a><br />
     <a href = "<?php echo APP_URL; ?>category/list">Go to categories page</a>
-</form>
+    </form>
+    <?php
+        if($_SESSION['loggedin'] == 1) { ?>
+            <h2>Comments:</h2>
+            <ol>
+                <?php  $comments = model_comment::load_by_product_id($product->id);
+                foreach($comments as $comment) {  ?>
+                    <li> <?php echo $comment['comment']; ?> </li>
+                <?php } ?>
+            </ol>
+            <?php
+            @include APP_PATH . 'view/comment_add.tpl.php';
+        }
+     ?>
+<?php
+if($_SESSION['loggedin'] != 1) { ?>
+    <h2>Comments:</h2>
+    <ol>
+        <?php  $comments = model_comment::load_by_product_id($product->id);
+        foreach($comments as $comment) {  ?>
+            <li> <?php echo $comment['comment']; ?> </li>
+        <?php } ?>
+    </ol>
+    <?php
+    //@include APP_PATH . 'view/comment_add.tpl.php';
+}
+?>
+
+
+
+
+
 <?php @include APP_PATH . 'view/snippets/footer.tpl.php'; ?>
