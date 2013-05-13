@@ -87,4 +87,9 @@ class model_client {
         return false;
     }
 
+    public function edit_my_account($id,$name,$pin,$address,$telephone) {
+        $db = model_database::instance();
+        $sql = 'update client set client_name  = "' . mysql_real_escape_string($name) . '", client_pin = "' . mysql_real_escape_string($pin) . '", client_address= "' . mysql_real_escape_string($address) . '", client_phone = "' . mysql_real_escape_string($telephone) . '" where client_id = "'.intval($id) .'" ';
+        $db->execute($sql);
+    }
 }
