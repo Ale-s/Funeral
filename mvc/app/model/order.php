@@ -35,15 +35,17 @@ class model_order {
         return FALSE;
     }
 
-
+    // Get a contract with a specified id.
     public function get_contract() {
         return model_contract::load_by_id($this->contract_id);
     }
 
+    // Get a client with a specified id.
     public function get_client() {
         return model_client::load_by_id($this->client_id);
     }
 
+    // Get all orders from db.
     public static function get_orders() {
         $db = model_database::instance();
         $sql = 'SELECT * from orders';
@@ -83,5 +85,14 @@ class model_order {
                ' WHERE order_id = ' . intval($order_id);
         $db->execute($sql);
     }
+
+    // Obtain all products name from db.
+    public static function get_all_products() {
+        $db = model_database::instance();
+        $sql = 'SELECT product_name from product';
+        $products = $db->get_rows($sql);
+        return $products;
+    }
+
 
 }

@@ -27,4 +27,6 @@ class controller_order {
             die;
         }
     }
+
+    // Loads all products name from db and include the view to display them.
 }
