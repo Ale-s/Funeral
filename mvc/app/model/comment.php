@@ -49,5 +49,17 @@
 
      }
 
+     public static function count_comments($product_id){
+         $db = model_database::instance();
+
+         $sql = 'select count(*) from comments where product_id = '. intval($product_id);
+         $result= mysql_query($sql);
+
+                 // if (!$result) echo mysql_error();
+        // $row = mysql_fetch_row($result);
+         echo mysql_result($result,0);
+        // return $row;
+     }
+
 
  }

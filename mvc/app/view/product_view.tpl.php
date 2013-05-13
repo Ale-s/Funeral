@@ -37,7 +37,7 @@
     </form>
     <?php
         if($_SESSION['loggedin'] == 1) { ?>
-            <h2>Comments:</h2>
+            <h2>Comments(<?php $comment = model_comment::count_comments($product->id); echo $comment;?>):</h2>
             <ol>
                 <?php  $comments = model_comment::load_by_product_id($product->id);
                 foreach($comments as $comment) {  ?>
@@ -50,7 +50,7 @@
      ?>
 <?php
 if($_SESSION['loggedin'] != 1) { ?>
-    <h2>Comments:</h2>
+    <h2>Comments(<?php $comment = model_comment::count_comments($product->id); echo $comment;?>):</h2>
     <ol>
         <?php  $comments = model_comment::load_by_product_id($product->id);
         foreach($comments as $comment) {  ?>
