@@ -1,4 +1,8 @@
 <?php @include APP_PATH . 'view/snippets/header.tpl.php'; ?>
+<?php if ($form_csv) { ?>
+    <p><em>Ati trimis date in fisier csv!</em></p>
+<?php } ?>
+
 
     <h2> List of orders : </h2>
     <table border = 2>
@@ -31,6 +35,29 @@
 
     <?php } ?>
     </table>
-    <a href="<?php echo APP_URL; ?>admin/index">&laquo;Back</a>
 
+
+
+
+    <form action="<?php echo APP_URL; ?>order/list/" method="post">
+        Name : <select name="form[name]">
+        <?php
+        foreach($clients as $c){
+            ?>
+            <option value="<?php echo $c->id;?>"><?php echo $c->id;?></option>
+
+
+
+
+        <?php }
+        ?>
+
+            </select><br />
+
+
+    <input type="submit" name="form[action]" value="Export CSV" />
+    </form>
+
+
+<a href="<?php echo APP_URL; ?>admin/index">&laquo;Back
 <?php @include APP_PATH . 'view/snippets/footer.tpl.php';
