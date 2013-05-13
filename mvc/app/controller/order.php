@@ -27,4 +27,10 @@ class controller_order {
             die;
         }
     }
+
+    function action_myOrders(){
+        $orders = model_order::get_user_orders($_SESSION['client_id']);
+
+        @include_once APP_PATH . 'view/order_mylist.tpl.php';
+    }
 }

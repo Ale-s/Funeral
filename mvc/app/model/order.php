@@ -84,4 +84,18 @@ class model_order {
         $db->execute($sql);
     }
 
+    /**
+     * Returns the orders of a user.
+     */
+    public static function get_user_orders($client_id) {
+        $db = model_database::instance();
+        $sql = 'SELECT order_id, status
+                        FROM orders
+                        WHERE client_id = ' .intval($client_id);
+
+        $orders = $db->get_rows($sql);
+
+        return $orders;
+    }
+
 }
