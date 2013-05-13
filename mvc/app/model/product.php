@@ -126,5 +126,23 @@ class model_product {
         $db->execute($sql);
     }
 
+    /**
+     * Search a product by a given word
+     * @param $word
+     * @return boolean/array
+     */
+    public static function search_product($word) {
+        $db = model_database::instance();
+        $sql = "SELECT *
+                FROM product
+                WHERE product_description REGEXP '[[:<:]]" . $word . "[[:>:]]'
+                   or product_name REGEXP '[[:<:]]" . $word . "[[:>:]]'";
+        $products_list[] = array();
+        if ($products_list = $db->get_rows($sql)) {
+            return $products_list;
+        }
+        return FALSE;
+    }
+
 }
 

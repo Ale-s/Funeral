@@ -92,4 +92,15 @@ class model_client {
         $sql = 'update client set client_name  = "' . mysql_real_escape_string($name) . '", client_pin = "' . mysql_real_escape_string($pin) . '", client_address= "' . mysql_real_escape_string($address) . '", client_phone = "' . mysql_real_escape_string($telephone) . '" where client_id = "'.intval($id) .'" ';
         $db->execute($sql);
     }
+
+    /** Returns the client_id and client_type of an user.
+     * @param $user_name
+     * @return array
+     */
+    public static function get_id_type_by_username ($user_name) {
+        $db = model_database::instance();
+        $sql = "SELECT client_id, user_type FROM user WHERE user_name = '" . $user_name . "'";
+        $result = $db->get_row($sql);
+        return $result;
+    }
 }

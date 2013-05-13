@@ -107,6 +107,22 @@ class controller_product {
         //Include view for this page.
         @include_once APP_PATH . 'view/product_editProduct.tpl.php';
     }
+
+    function action_searchProduct($param){
+        if (isset($_POST['form']['action'])) {
+            if (!empty($_POST['form']['word'])) {
+                if (model_product::search_product($_POST['form']['word'])) {
+                $products_list = model_product::search_product($_POST['form']['word']);
+                }
+                else {
+                    $products_list = array("product_name" => "No products found!");
+                }
+            }
+
+        }
+
+        @include_once APP_PATH . 'view/product_search.tpl.php';
+    }
 }
 
 
