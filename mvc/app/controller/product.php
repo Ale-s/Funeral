@@ -10,20 +10,6 @@ class controller_product {
 
         $form_error = FALSE;
 
-
-        if (isset ($_POST['form']['action'])){
-           if ($product->amount >= $_POST['form']['amount']){
-               $cart =new controller_cart();
-               $cart->action_addProduct($prod);
-
-
-           }
-            else{
-                $form_error = TRUE;
-                @include_once APP_PATH . 'view/product_view.tpl.php';
-            }
-        }
-
         @include_once APP_PATH . 'view/product_view.tpl.php';
 
     }

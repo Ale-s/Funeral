@@ -28,6 +28,7 @@ class controller_order {
 
                 $file = 'fisier.csv';
                 $order = model_order::get_orders_by_client($_POST['form']['name']);
+                $client = model_client::load_by_id($_POST['form']['name']);
 
 
                 //var_dump(sizeof($order));die();
@@ -51,7 +52,8 @@ class controller_order {
                         }
 
 
-                        fputcsv($fp,array($valori['order_id'],$_POST['form']['name'],$data_contract,$status));
+
+                        fputcsv($fp,array($valori['order_id'],$client->name,$data_contract,$status));
                     }
 
                     $path = 'C:\wamp\www\Funeral\mvc\fisier.csv';
