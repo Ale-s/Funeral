@@ -107,6 +107,14 @@ class controller_product {
         //Include view for this page.
         @include_once APP_PATH . 'view/product_editProduct.tpl.php';
     }
+
+
+    // Loads all products name from db and include the view to display them.
+    function action_displayProductsName() {
+        $products = model_product::get_all_productsName();
+
+        @include_once APP_PATH . 'view/product_displayProductsName.php';
+    }
 }
 
 
