@@ -54,6 +54,7 @@ class controller_product {
         if (isset($_POST['form']['action'])) {
             if (!empty($_POST['form']['name']) && !empty($_POST['form']['price'])){
                 if($product = model_product::add_product($_POST['form']['name'], $_POST['form']['description'],$_POST['form']['price'],$_POST['form']['amount'],$idCategory)) {
+                    model_product::insert_words();
                     header('Location: ' . APP_URL . 'product/view/' . $product->id);
                     die;
                 }
@@ -76,6 +77,7 @@ class controller_product {
          $category = $product->category_id;
          if (isset($_POST['form']['action'])) {
             model_product::delete_product_by_id($params[0]);
+            model_product::insert_words();
             header('Location: ' . APP_URL . 'product/listbycategory/' . $category );
 
             die;
@@ -98,6 +100,7 @@ class controller_product {
         if (isset($_POST['form']['action'])) {
             if (!empty($_POST['form']['name']) && !empty($_POST['form']['price'])){
                 $product::edit_product_by_id($id,$_POST['form']['name'], $_POST['form']['description'],$_POST['form']['price'],$_POST['form']['amount']);
+                model_product::insert_words();
                 header('Location: ' . APP_URL . 'product/listbycategory/' . $category );
                 die;
             }
@@ -122,6 +125,24 @@ class controller_product {
         }
 
         @include_once APP_PATH . 'view/product_search.tpl.php';
+    }
+
+    function action_searchProduct2($param){
+//        model_product::init_search_table();
+//        model_product::insert_words();
+        if (isset($_POST['form']['action'])) {
+            if (!empty($_POST['form']['word'])) {
+                if (model_product::get_products($_POST['form']['word'])) {
+                    $products_list = model_product::search_product($_POST['form']['word']);
+                }
+                else {
+                    $products_list = array("product_name" => "No products found!");
+                }
+            }
+
+        }
+
+        @include_once APP_PATH . 'view/product_search2.tpl.php';
     }
 }
 
