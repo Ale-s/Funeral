@@ -4,6 +4,15 @@
 <?php } ?>
 
 
+
+<?php if ($form_error) { ?>
+    <script type="text/javascript">;
+        alert('acest client nu are nicio comanda!');
+    </script>
+<?php } ?>
+
+
+
     <h2> List of orders : </h2>
     <table border = 2>
     <?php
@@ -44,7 +53,7 @@
         <?php
         foreach($clients as $c){
             ?>
-            <option value="<?php echo $c->id;?>"><?php echo $c->id;?></option>
+            <option value="<?php echo $c->id;?>"><?php echo $c->name;?></option>
 
 
 
@@ -57,6 +66,9 @@
 
     <input type="submit" name="form[action]" value="Export CSV" />
     </form>
+
+
+
 
 
 <a href="<?php echo APP_URL; ?>admin/index">&laquo;Back

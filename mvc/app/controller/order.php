@@ -16,25 +16,28 @@ class controller_order {
     function action_list() {
         $orders = model_order::get_orders();
         $form_csv = FALSE;
+        $form_error = FALSE;
 
         $clients = model_client::load_all();
 
         if (isset($_POST['form']['action'])) {
 
             if(!empty($_POST['form']['name'])){
+                $form_error = TRUE;
+
 
                 $file = 'fisier.csv';
-                $client_name = $_POST['form']['name'];
-
-           //     $client_id = model_client::load_by_name($_POST['form']['name']);
-           //     var_dump($client_id);die();
                 $order = model_order::get_orders_by_client($_POST['form']['name']);
-                $o = (array) $order;
 
-                if($fp = fopen($file, 'w')) {
 
-                    foreach($o as $valori) {
+                //var_dump(sizeof($order));die();
+                if (sizeof($order) == 0){
+                    $form_error = TRUE;
+                }
 
+                else {
+                    $fp = fopen($file, 'w');
+                    foreach($order as $valori) {
                         $contract = model_contract::load_by_id($valori['contract_id']);
                         $data_contract = $contract->date;
                         if ($valori['status'] == 1){
@@ -48,15 +51,30 @@ class controller_order {
                         }
 
 
-                        $foo = array($valori['order_id'],$_POST['form']['name'],$data_contract,$status);
-                      //  var_dump($foo);die();
-                        fputcsv($fp,$foo);
+                        fputcsv($fp,array($valori['order_id'],$_POST['form']['name'],$data_contract,$status));
                     }
+
+                    $path = 'C:\wamp\www\Funeral\mvc\fisier.csv';
+                    if (file_exists($path)) {
+
+                        //set appropriate headers
+                        header('Content-Description: File Transfer');
+                        header('Content-Disposition: attachment; filename='.basename($path));
+                        header('Content-Length: ' . filesize($path));
+                        ob_clean();// Clean (erase) the output buffer.
+                        flush();
+
+                        //read the file from disk and output the content.
+                        readfile($path);
+                        exit;
+                    }
+
 
                     // inchidem fisierul
                     fclose($fp);
+                    $form_csv = TRUE;
+
                 }
-                $form_csv = TRUE;
 
             }
 
