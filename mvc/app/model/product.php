@@ -64,6 +64,17 @@ class model_product {
     }
 
 
+    /**
+     * Obtain a product id when we specifying a concrete product name.
+     * @param $product_name
+     */
+    public static function get_id_by_name ($product_name) {
+        $db = model_database::instance();
+        $sql = "SELECT product_id FROM product WHERE product_name = '" . $product_name . "'";
+        $result = $db->get_row($sql);
+        $id = intval($result['product_id']);
+        return $id;
+    }
 
 
 
@@ -124,6 +135,16 @@ class model_product {
         $db = model_database::instance();
         $sql = 'update product set product_name  = "' . mysql_real_escape_string($name) . '", product_description = "' . mysql_real_escape_string($description) . '",product_price = '   . intval(mysql_real_escape_string($price)) . ',product_amount = ' . intval(mysql_real_escape_string($amount)) .' where product_id = ' . intval($id);
         $db->execute($sql);
+    }
+
+    /**
+     * Obtain all products name from db.
+     */
+    public static function get_all_productsName() {
+        $db = model_database::instance();
+        $sql = 'SELECT product_name from product';
+        $products = $db->get_rows($sql);
+        return $products;
     }
 
     /**

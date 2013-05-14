@@ -12,9 +12,10 @@ class model_user {
 
 
     /**
-     * Loads an user by USERNAME.
+     * Return an user with a specified username.
+     * @param $username Username.
+     * @return bool|model_user
      */
-
     public static function load_by_username($username) {
         $db = model_database::instance();
         $sql = 'SELECT *
@@ -31,6 +32,11 @@ class model_user {
         return FALSE;
     }
 
+    /**
+     * Return an user with a specified id.
+     * @param $id ID.
+     * @return bool|model_user
+     */
     public static function load_by_client_id($id) {
         $db = model_database::instance();
         $sql = 'SELECT *
@@ -47,15 +53,14 @@ class model_user {
         return FALSE;
     }
 
-    // Return a client with a specifically id
+    /**
+     * Return a client with a specified id
+     */
     public function get_client() {
         return model_client::load_by_id($this->client_id);
 
     }
 
-    public function get_all_clients() {
-
-    }
     /** Creates an user.
      * @param $name
      * @param $password
