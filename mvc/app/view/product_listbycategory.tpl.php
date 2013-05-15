@@ -16,8 +16,9 @@
 
            <?php }
            ?>
-
+    <?php    if ($_SESSION['user_type'] == 1) {?>
     <a href = "<?php echo APP_URL ?>/product/addProduct/<?php echo $category->id; ?>">Add a product</a><br />
+    <?php } ?>
     <a href = "<?php echo APP_URL ?>/category/list">Back</a>
 
 
