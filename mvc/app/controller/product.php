@@ -6,10 +6,47 @@ class controller_product {
      */
     function action_view($params){
         $prod = $params[0];
+        $product = new model_product();
         $product = model_product::load_by_id($prod);
-
         $form_error = FALSE;
+        $error = FALSE;
+        $result = model_rating::get_rating($product->id);
+        $product->update_rating($result);
+        if (isset ($_POST['form']['action'])){
+           if ($product->amount >= $_POST['form']['amount']){
+               $_SESSION['cart'][$product->id] = $_POST['form']['amount'];
+               $quantity = $product->amount - $_POST['form']['amount'];
+               $product::edit_product_by_id($product->id,$product->name,$product->description,$product->price,$quantity);
+               // Include view for this page.
+               @include_once APP_PATH . 'view/cart_view.tpl.php';
+           }
+            else{
+                $form_error = TRUE;
+                @include_once APP_PATH . 'view/product_view.tpl.php';
 
+            }
+        }
+       // else{
+            // Include view for this page.
+       //     @include_once APP_PATH . 'view/product_view.tpl.php';
+       // }
+        $pid = $product->id;
+        if(isset($_POST['form']['add_rating'])) {
+            if (!empty($_POST['form']['rating'])) {
+                if(model_rating:: validate_rating($_SESSION['client_id'], $pid) == TRUE) {
+                    model_rating::add_rating($_POST['form']['rating'],$_SESSION['client_id'], $pid);
+                    $result = model_rating::get_rating($product->id);
+                    $product->update_rating($result);
+                    header('Location: ' . APP_URL . 'product/view/' . $product->id);
+                    die;
+                }
+                $error = TRUE;
+            }
+        }
+        //else{
+            // Include view for this page.
+        //    @include_once APP_PATH . 'view/product_view.tpl.php';
+        //}
         @include_once APP_PATH . 'view/product_view.tpl.php';
 
     }
@@ -98,7 +135,7 @@ class controller_product {
         if (isset($_POST['form']['action'])) {
             if (!empty($_POST['form']['word'])) {
                 if (model_product::search_product($_POST['form']['word'])) {
-                $products_list = model_product::search_product($_POST['form']['word']);
+                    $products_list = model_product::search_product($_POST['form']['word']);
                 }
                 else {
                     $products_list = array("product_name" => "No products found!");

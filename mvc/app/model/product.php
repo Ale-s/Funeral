@@ -17,6 +17,7 @@ class model_product {
     var $amount;
     var $image;
     var $url;
+    var $average;
 
 
     /**
@@ -39,6 +40,7 @@ class model_product {
             $product->amount = $result['product_amount'];
             $product->image = $result['product_image'];
             $product->url = $result['product_url'];
+            $product->average = $result['average'];
             return $product;
         }
         return FALSE;
@@ -108,6 +110,12 @@ class model_product {
 
         return model_product::load_by_id($db->last_insert_id());
 
+    }
+    public function update_rating($result) {
+        $db = model_database::instance();
+        $sql = 'update product set average = ' . intval($result) . ' where product_id = ' . intval($this->id);
+        $db->execute($sql);
+        return TRUE;
     }
 
 
