@@ -38,29 +38,42 @@
     <?php
         if($_SESSION['loggedin'] == 1) { ?>
             <h2>Comments(<?php $comment = model_comment::count_comments($product->id); echo $comment;?>):</h2>
-            <ol>
-                <?php  $comments = model_comment::load_by_product_id($product->id);
-                foreach($comments as $comment) {  ?>
-                    <li> <?php echo $comment['comment']; ?> </li>
-                <?php } ?>
-            </ol>
-            <?php
-            @include APP_PATH . 'view/comment_add.tpl.php';
-        }
-     ?>
-<?php
-if($_SESSION['loggedin'] != 1) { ?>
-    <h2>Comments(<?php $comment = model_comment::count_comments($product->id); echo $comment;?>):</h2>
-    <ol>
-        <?php  $comments = model_comment::load_by_product_id($product->id);
-        foreach($comments as $comment) {  ?>
-            <li> <?php echo $comment['comment']; ?> </li>
-        <?php } ?>
-    </ol>
-    <?php
-    //@include APP_PATH . 'view/comment_add.tpl.php';
-}
-?>
+                <ul>
+                    <?php  $comments = model_comment::load_by_product_id($product->id);
+
+                    foreach($comments as $key => $value) {  ?>
+                        <li> <?php echo $value['comment']; ?>  </li>
+                                <?php
+                               $m_comments = model_comment::load_by_comment_id($value['comment_id']); ?>
+                        <ol>
+                        <?php
+                        foreach($m_comments as $key => $secondvalue) { ?>
+                                <li> <?php echo $secondvalue->comment; ?>    </li>
+                        <?php } ?>
+                            </ol>
+
+                <a href = "<?php echo APP_URL; ?>product/addMComments/<?php echo $value['comment_id'] ?>">Reply</a><br />
+         <?php } ?>
+     </ul>
+
+     <?php
+     @include APP_PATH . 'view/comment_add.tpl.php';
+ }?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
