@@ -60,6 +60,30 @@
      @include APP_PATH . 'view/comment_add.tpl.php';
  }?>
 
+<?php
+if($_SESSION['loggedin'] != 1) { ?>
+    <h2>Comments(<?php $comment = model_comment::count_comments($product->id); echo $comment;?>):</h2>
+    <ul>
+        <?php  $comments = model_comment::load_by_product_id($product->id);
+
+        foreach($comments as $key => $value) {  ?>
+            <li> <?php echo $value['comment']; ?>  </li>
+            <?php
+            $m_comments = model_comment::load_by_comment_id($value['comment_id']); ?>
+            <ol>
+                <?php
+                foreach($m_comments as $key => $secondvalue) { ?>
+                    <li> <?php echo $secondvalue->comment; ?>    </li>
+                <?php } ?>
+            </ol>
+
+
+        <?php } ?>
+    </ul>
+
+    <?php
+   
+}?>
 
 
 
