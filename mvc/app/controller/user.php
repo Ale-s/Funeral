@@ -17,8 +17,8 @@ class controller_user {
             if ($client = model_client::create($_POST['form']['name'], $_POST['form']['cnp'], $_POST['form']['address'],$_POST['form']['telephone']))
             { if($user = model_user::create_user($_POST['form']['username'], $_POST['form']['password'],$client->id)){
                //alert('User registered successfully!');
-               //header('Location: ' . APP_URL . 'view/admin/login');
-                    echo 'User registered successfully!';
+               header('Location: ' . APP_URL . '/login/login');
+                   // echo 'User registered successfully!';
                 die;
             }
         }

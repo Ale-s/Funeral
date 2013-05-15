@@ -131,6 +131,15 @@ class model_order {
 
     }
 
+    // Obtain all products name from db.
+    public static function get_all_products() {
+        $db = model_database::instance();
+        $sql = 'SELECT product_name from product';
+        $products = $db->get_rows($sql);
+        return $products;
+    }
+
+
     /**
      * Returns the orders of a user.
      */
@@ -144,5 +153,18 @@ class model_order {
 
         return $orders;
     }
+    
+    /**
+     *
+     */
+    public static function get_orders_by_client($client){
+
+        $db = model_database::instance();
+        $sql = 'SELECT * from orders where client_id = ' . intval($client);
+        $orders = $db->get_rows($sql);
+        return $orders;
+
+    }
+
 
 }

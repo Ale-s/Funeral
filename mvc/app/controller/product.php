@@ -6,10 +6,12 @@ class controller_product {
      */
     function action_view($params){
         $prod = $params[0];
+        $product = new model_product();
         $product = model_product::load_by_id($prod);
         $form_error = FALSE;
-
-
+        $error = FALSE;
+        $result = model_rating::get_rating($product->id);
+        $product->update_rating($result);
         if (isset ($_POST['form']['action'])){
            if ($product->amount >= $_POST['form']['amount']){
                $_SESSION['cart'][$product->id] = $_POST['form']['amount'];
@@ -24,10 +26,28 @@ class controller_product {
 
             }
         }
-        else{
+       // else{
             // Include view for this page.
-            @include_once APP_PATH . 'view/product_view.tpl.php';
+       //     @include_once APP_PATH . 'view/product_view.tpl.php';
+       // }
+        $pid = $product->id;
+        if(isset($_POST['form']['add_rating'])) {
+            if (!empty($_POST['form']['rating'])) {
+                if(model_rating:: validate_rating($_SESSION['client_id'], $pid) == TRUE) {
+                    model_rating::add_rating($_POST['form']['rating'],$_SESSION['client_id'], $pid);
+                    $result = model_rating::get_rating($product->id);
+                    $product->update_rating($result);
+                    header('Location: ' . APP_URL . 'product/view/' . $product->id);
+                    die;
+                }
+                $error = TRUE;
+            }
         }
+        //else{
+            // Include view for this page.
+        //    @include_once APP_PATH . 'view/product_view.tpl.php';
+        //}
+        @include_once APP_PATH . 'view/product_view.tpl.php';
 
     }
 
@@ -115,7 +135,7 @@ class controller_product {
         if (isset($_POST['form']['action'])) {
             if (!empty($_POST['form']['word'])) {
                 if (model_product::search_product($_POST['form']['word'])) {
-                $products_list = model_product::search_product($_POST['form']['word']);
+                    $products_list = model_product::search_product($_POST['form']['word']);
                 }
                 else {
                     $products_list = array("product_name" => "No products found!");
@@ -152,6 +172,57 @@ class controller_product {
 
         @include_once APP_PATH . 'view/product_displayProductsName.php';
     }
+
+    function action_addComment($params) {
+        $forms_error = FALSE;
+        $product = model_product::load_by_id($params[0]);
+
+        $idP = $product->id;
+
+        if (isset($_POST['form']['action'])) {
+            model_comment::add_comment($idP,$_POST['form']['comment']);
+
+                //@include_once APP_PATH . 'view/comment_view.tpl.php';
+            header('Location: ' . APP_URL . 'product/view/' . $idP );
+
+            $forms_error = false;
+
+        }
+        else {
+            $forms_error = true;
+        }
+
+        $comments = model_comment::load_by_product_id($idP);
+
+        @include_once APP_PATH . 'view/product_view.tpl.php';
+    }
+
+    function action_addMComments($params){
+        $form_error = FALSE;
+        $comment = model_comment::load_by_id($params[0]);
+        $idC = $comment->id;
+        $idP = $comment->product_id;
+
+
+        if (isset($_POST['form']['action'])) {
+
+                model_comment::add_mcomment($idC,$_POST['form']['comment']);
+                    header('Location: ' . APP_URL . 'product/view/' . $idP);
+
+
+                $form_error = false;
+
+
+        }
+        else {
+            $forms_error = true;
+        }
+
+        //Include view for this page.
+        @include_once APP_PATH . 'view/multiple_comments.tpl.php';
+    }
+
+
 }
 
 
