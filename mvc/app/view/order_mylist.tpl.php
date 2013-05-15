@@ -15,4 +15,4 @@
         <?php } ?>
     <br />
     <a href = "<?php echo APP_URL ?>home/">&laquo;Back to home page</a>
-<?php @include APP_PATH . 'view/snippets/footer.tpl.php'; ?>
+<?php @include APP_PATH . 'view/snippets/footer.tpl.php';

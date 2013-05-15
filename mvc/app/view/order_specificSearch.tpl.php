@@ -6,7 +6,8 @@ if ($productsNr == 0){
     echo '<h3> Please select a product </h3>' . '</br>';
 }
 else { ?>
-    <h2> List of special orders : </h2>
+    <h3> List of special orders : </h3>
+    <ol>
     <?php
         if (!empty($ordersId)){
             $n = count($ordersId);
@@ -19,6 +20,7 @@ else { ?>
     }
     ?>
 <?php } ?>
+    </ol>
 <a href="<?php echo APP_URL; ?>product/displayProductsName">&laquo;Back</a>
 
-<?php @include APP_PATH . 'view/snippets/footer.tpl.php'; ?>
+<?php @include APP_PATH . 'view/snippets/footer.tpl.php';

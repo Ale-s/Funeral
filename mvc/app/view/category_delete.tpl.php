@@ -10,4 +10,4 @@
     <a href = "<?php echo APP_URL; ?>category/list">Back</a><br />
 </form>
 
-<?php @include APP_PATH . 'view/snippets/footer.tpl.php'; ?>
+<?php @include APP_PATH . 'view/snippets/footer.tpl.php';

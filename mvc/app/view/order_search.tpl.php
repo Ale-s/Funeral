@@ -23,4 +23,4 @@
      } ?>
 <a href="<?php echo APP_URL; ?>product/displayProductsName">&laquo;Back</a>
 
-<?php @include APP_PATH . 'view/snippets/footer.tpl.php'; ?>
+<?php @include APP_PATH . 'view/snippets/footer.tpl.php';

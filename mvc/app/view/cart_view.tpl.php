@@ -25,6 +25,6 @@
 </table>
 </form>
 
-<h2> Your final price is : <?php echo $total_price ?></h2>
-<a href = "<?php echo APP_URL ?>home/">Back to home page</a>
-<?php @include APP_PATH . 'view/snippets/footer.tpl.php'; ?>
+<h3> Your final price is : <?php echo $total_price ?></h3>
+<a href = "<?php echo APP_URL ?>home/index">&laquo;Back to home page</a>
+<?php @include APP_PATH . 'view/snippets/footer.tpl.php';

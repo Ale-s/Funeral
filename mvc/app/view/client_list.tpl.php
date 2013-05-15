@@ -1,17 +1,18 @@
-<?php
-?>
-<h3>Clients List</h3>
+<?php @include APP_PATH . 'view/snippets/header.tpl.php'; ?>
+<h2>Clients List:</h2>
+<ol>
+
 <?php foreach ($clients as $client ) {
     $id = $client->id; ?>
-<li>
-
-    <a href=<?php echo "/Funeral/mvc/client/view/" .$id ?>>
-        <?php
-            echo $client->name . "</ br>";
-        ?>
-    </a>
-</li>
+    <li>
+        <a href = "<?php echo APP_URL ?>client/view/<?php echo $id ?>">
+            <?php
+                echo $client->name . "</ br>";
+            ?>
+        </a>
+    </li>
 <?php } ?>
-    <a href="<?php echo APP_URL; ?>admin/index/">&laquo;Back</a>
+</ol>
+<a href="<?php echo APP_URL; ?>admin/index/">&laquo;Back</a>
 
-<?php @include APP_PATH . 'view/snippets/footer.tpl.php'; ?>
+<?php @include APP_PATH . 'view/snippets/footer.tpl.php';

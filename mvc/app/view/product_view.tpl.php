@@ -35,4 +35,4 @@
     <a href = "<?php echo APP_URL; ?>product/listbycategory/<?php echo $product->category_id?>">Back</a><br />
     <a href = "<?php echo APP_URL; ?>category/list">Go to categories page</a>
 </form>
-<?php @include APP_PATH . 'view/snippets/footer.tpl.php'; ?>
+<?php @include APP_PATH . 'view/snippets/footer.tpl.php';

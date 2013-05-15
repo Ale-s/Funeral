@@ -1,6 +1,6 @@
 <?php @include APP_PATH . 'view/snippets/header.tpl.php'; ?>
 
-<h2><a href ="http://localhost/Funeral/mvc">Home</a> Contact</h2>
+<h3>Contact</h3>
 <p>
     You can contact us for more information:
     <ul>
@@ -10,5 +10,7 @@
         <li>Address: str. Manastur, no 666, Cluj-Napoca city </li>
     </ul>
 </p>
+<hr>
+<a href ="<?php echo APP_URL?>home/index">&laquo;Back to homepage</a>
 
-<?php @include APP_PATH . 'view/snippets/footer.tpl.php'; ?>
+<?php @include APP_PATH . 'view/snippets/footer.tpl.php';

@@ -32,5 +32,7 @@
 	<br />
 	<input type="submit" name="form[action]" value="Register!" />
 </form>
+<hr />
+<a href="<?php echo APP_URL; ?>home/index/">&laquo;Back to homepage</a>
 
-<?php @include APP_PATH . 'view/snippets/footer.tpl.php'; ?>
+<?php @include APP_PATH . 'view/snippets/footer.tpl.php';

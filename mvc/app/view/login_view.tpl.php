@@ -18,10 +18,10 @@
         <input type="submit" name="form[action]" value="Login" />
 
         <a href = "<?php echo APP_URL; ?>user/register/">Not registred yet?</a>
-        <br />
-        <a href = "<?php echo APP_URL; ?>">Home</a>
+        <br /> <hr />
+        <a href = "<?php echo APP_URL; ?>home/index">&laquo;Back to homepage</a>
 
 
     </form>
 
-<?php @include APP_PATH . 'view/snippets/footer.tpl.php'; ?>
+<?php @include APP_PATH . 'view/snippets/footer.tpl.php';

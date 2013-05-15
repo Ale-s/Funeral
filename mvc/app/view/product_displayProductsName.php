@@ -10,3 +10,5 @@
     <input type = "submit" value = GO! >
 </form>
 <a href="<?php echo APP_URL; ?>admin/index">&laquo;Back</a>
+
+<?php @include APP_PATH . 'view/snippets/footer.tpl.php';

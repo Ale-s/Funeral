@@ -4,4 +4,4 @@
 
 <p>Pagina pe care ai accesat-o nu exista. Mergi la <a href="<?php echo APP_URL; ?>">prima pagina</a>.</p>
 
-<?php @include APP_PATH . 'view/snippets/footer.tpl.php'; ?>
+<?php @include APP_PATH . 'view/snippets/footer.tpl.php';

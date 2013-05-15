@@ -1,27 +1,36 @@
 <?php @include APP_PATH . 'view/snippets/header.tpl.php'; ?>
-<h1><a href = "<?php echo APP_URL; ?>">HOME</a><br /></h1>
 
-<h2>View products from  <?php echo $category->name; ?></h2>
 
-<p>
+<h2> Products from:  <?php echo $category->name; ?></h2>
+
+    <table border = 2>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Details</th>
+        </tr>
     <?php
        foreach($products as $prods){
            ?>
-           <p>Name:<?php echo $prods['product_name']; ?></p>
 
-           <p>Price:<?php echo $prods['product_price']; ?></p>
+           <tr>
+           <td><?php echo $prods['product_name']; ?></td>
 
-           <a href = "<?php echo APP_URL ?>product/view/<?php echo $prods['product_id']; ?>">View details</a>
+           <td><?php echo $prods['product_price']; ?></td>
 
+           <td><a href = "<?php echo APP_URL ?>product/view/<?php echo $prods['product_id']; ?>">View details</a></td>
+            </tr>
 
            <?php }
            ?>
+    </table>
     <?php    if ($_SESSION['user_type'] == 1) {?>
-    <a href = "<?php echo APP_URL ?>/product/addProduct/<?php echo $category->id; ?>">Add a product</a><br />
+    <h3><a href = "<?php echo APP_URL ?>/product/addProduct/<?php echo $category->id; ?>">Add a new product</a></h3><br />
     <?php } ?>
-    <a href = "<?php echo APP_URL ?>/category/list">Back</a>
+    <a href = "<?php echo APP_URL ?>category/list">&laquo;Back</a>
 
 
-</p>
+<hr>
+<a href = "<?php echo APP_URL; ?>/home/index">&laquo;Back to homepage</a>
 
-<?php @include APP_PATH . 'view/snippets/footer.tpl.php'; ?>
+<?php @include APP_PATH . 'view/snippets/footer.tpl.php';
