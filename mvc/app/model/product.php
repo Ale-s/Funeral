@@ -220,9 +220,6 @@ class model_product {
 
     }
 
-    public static function get_comments() {
-
-    }
 
 }
 

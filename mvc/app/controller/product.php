@@ -177,6 +177,30 @@ class controller_product {
         @include_once APP_PATH . 'view/product_view.tpl.php';
     }
 
+    function action_addMComments($params){
+        $form_error = FALSE;
+        $comment = model_comment::load_by_id($params[0]);
+        $idC = $comment->id;
+        $idP = $comment->product_id;
+
+
+        if (isset($_POST['form']['action'])) {
+
+                model_comment::add_mcomment($idC,$_POST['form']['comment']);
+                    header('Location: ' . APP_URL . 'product/view/' . $idP);
+
+
+                $form_error = false;
+
+
+        }
+        else {
+            $forms_error = true;
+        }
+
+        //Include view for this page.
+        @include_once APP_PATH . 'view/multiple_comments.tpl.php';
+    }
 
 
 }
