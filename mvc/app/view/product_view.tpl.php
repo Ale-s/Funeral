@@ -15,7 +15,10 @@
 
     <p>CATEGORY:<?php echo $product->category_id; ?></p>
 
-    <p>RATING:<?php echo $product->average; ?></p></br>
+    <p>RATING:<?php echo //$product->average;
+                        $result;
+               ?>
+    </p></br>
     <a href = "<?php echo APP_URL; ?>product/deleteProduct/<?php echo $product->id?>">Delete this product</a>
     <a href = "<?php echo APP_URL; ?>product/editProduct/<?php echo $product->id?>">Edit this product</a>
     <br />
