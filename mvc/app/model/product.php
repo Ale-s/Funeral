@@ -221,5 +221,11 @@ class model_product {
     }
 
 
+    public  function edit_product_amount_by_id($amount){
+        $db = model_database::instance();
+        $sql = 'update product set product_amount  = product_amount = ' . intval(mysql_real_escape_string($amount)) .' where product_id = ' . intval($this->id);
+        $db->execute($sql);
+    }
+
 }
 

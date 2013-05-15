@@ -144,5 +144,18 @@ class model_order {
 
         return $orders;
     }
+    
+    /**
+     *
+     */
+    public static function get_orders_by_client($client){
+
+        $db = model_database::instance();
+        $sql = 'SELECT * from orders where client_id = ' . intval($client);
+        $orders = $db->get_rows($sql);
+        return $orders;
+
+    }
+
 
 }
