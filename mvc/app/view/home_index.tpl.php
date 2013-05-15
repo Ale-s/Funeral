@@ -25,4 +25,18 @@
 <p><a href = "<?php echo APP_URL; ?>category/list"> Categories list </a></p>
 <p><a href = "<?php echo APP_URL; ?>about/view/"> About us </a></p>
 <p><a href = "<?php echo APP_URL; ?>contact/view/"> Contact </a></p>
-<?php @include APP_PATH . 'view/snippets/footer.tpl.php';
+
+    <!--Facebook section!-->
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+
+    <div class="fb-like-box" data-href="http://www.facebook.com/FreshDeadInc" data-width="292" data-show-faces="true" data-stream="false" data-show-border="true" data-header="true"></div>
+    <!--End Facebook section!-->
+
+<?php @include APP_PATH . 'view/snippets/footer.tpl.php'; ?>
