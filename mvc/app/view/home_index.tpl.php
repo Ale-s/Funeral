@@ -17,6 +17,7 @@
         <a href = "<?php echo APP_URL;?>admin/index"><font size="3">Admin page</a>
     <?php } ?>
     <a href = "<?php echo APP_URL; ?>product/searchProduct"><font size="3">Search a product</a>
+    <a href = "<?php echo APP_URL; ?>product/searchProduct2"><font size="3">Search a product2</a>
     <a href = "<?php echo APP_URL; ?>cart/view/"><font size="3"> View shooping cart </a>
 </h2>
 <p><a href = "<?php echo APP_URL; ?>category/list"> Categories list </a></p>

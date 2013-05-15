@@ -8,6 +8,8 @@
     <a href="<?php echo APP_URL; ?>client/list/" >View clients </a>
     <br />
     <a href="<?php echo APP_URL; ?>order/list/" >View orders </a>
+    <br />
+    <a href ="<?php echo APP_URL; ?>product/displayProductsName">Search products in orders</a>
 </div>
 
 <?php @include APP_PATH . 'view/snippets/footer.tpl.php'; ?>

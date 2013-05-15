@@ -7,27 +7,10 @@ class controller_product {
     function action_view($params){
         $prod = $params[0];
         $product = model_product::load_by_id($prod);
+
         $form_error = FALSE;
 
-
-        if (isset ($_POST['form']['action'])){
-           if ($product->amount >= $_POST['form']['amount']){
-               $_SESSION['cart'][$product->id] = $_POST['form']['amount'];
-               $quantity = $product->amount - $_POST['form']['amount'];
-               $product::edit_product_by_id($product->id,$product->name,$product->description,$product->price,$quantity);
-               // Include view for this page.
-               @include_once APP_PATH . 'view/cart_view.tpl.php';
-           }
-            else{
-                $form_error = TRUE;
-                @include_once APP_PATH . 'view/product_view.tpl.php';
-
-            }
-        }
-        else{
-            // Include view for this page.
-            @include_once APP_PATH . 'view/product_view.tpl.php';
-        }
+        @include_once APP_PATH . 'view/product_view.tpl.php';
 
     }
 
@@ -54,6 +37,7 @@ class controller_product {
         if (isset($_POST['form']['action'])) {
             if (!empty($_POST['form']['name']) && !empty($_POST['form']['price'])){
                 if($product = model_product::add_product($_POST['form']['name'], $_POST['form']['description'],$_POST['form']['price'],$_POST['form']['amount'],$idCategory)) {
+                    model_product::insert_words();
                     header('Location: ' . APP_URL . 'product/view/' . $product->id);
                     die;
                 }
@@ -76,6 +60,7 @@ class controller_product {
          $category = $product->category_id;
          if (isset($_POST['form']['action'])) {
             model_product::delete_product_by_id($params[0]);
+            model_product::insert_words();
             header('Location: ' . APP_URL . 'product/listbycategory/' . $category );
 
             die;
@@ -98,6 +83,7 @@ class controller_product {
         if (isset($_POST['form']['action'])) {
             if (!empty($_POST['form']['name']) && !empty($_POST['form']['price'])){
                 $product::edit_product_by_id($id,$_POST['form']['name'], $_POST['form']['description'],$_POST['form']['price'],$_POST['form']['amount']);
+                model_product::insert_words();
                 header('Location: ' . APP_URL . 'product/listbycategory/' . $category );
                 die;
             }
@@ -123,6 +109,83 @@ class controller_product {
 
         @include_once APP_PATH . 'view/product_search.tpl.php';
     }
+
+    function action_searchProduct2($param){
+//        model_product::init_search_table();
+//        model_product::insert_words();
+        if (isset($_POST['form']['action'])) {
+            if (!empty($_POST['form']['word'])) {
+                if (model_product::get_products($_POST['form']['word'])) {
+                    $products_list = model_product::search_product($_POST['form']['word']);
+                }
+                else {
+                    $products_list = array("product_name" => "No products found!");
+                }
+            }
+
+        }
+
+        @include_once APP_PATH . 'view/product_search2.tpl.php';
+    }
+
+
+    // Loads all products name from db and include the view to display them.
+    function action_displayProductsName() {
+        $products = model_product::get_all_productsName();
+
+        @include_once APP_PATH . 'view/product_displayProductsName.php';
+    }
+
+    function action_addComment($params) {
+        $forms_error = FALSE;
+        $product = model_product::load_by_id($params[0]);
+
+        $idP = $product->id;
+
+        if (isset($_POST['form']['action'])) {
+            model_comment::add_comment($idP,$_POST['form']['comment']);
+
+                //@include_once APP_PATH . 'view/comment_view.tpl.php';
+            header('Location: ' . APP_URL . 'product/view/' . $idP );
+
+            $forms_error = false;
+
+        }
+        else {
+            $forms_error = true;
+        }
+
+        $comments = model_comment::load_by_product_id($idP);
+
+        @include_once APP_PATH . 'view/product_view.tpl.php';
+    }
+
+    function action_addMComments($params){
+        $form_error = FALSE;
+        $comment = model_comment::load_by_id($params[0]);
+        $idC = $comment->id;
+        $idP = $comment->product_id;
+
+
+        if (isset($_POST['form']['action'])) {
+
+                model_comment::add_mcomment($idC,$_POST['form']['comment']);
+                    header('Location: ' . APP_URL . 'product/view/' . $idP);
+
+
+                $form_error = false;
+
+
+        }
+        else {
+            $forms_error = true;
+        }
+
+        //Include view for this page.
+        @include_once APP_PATH . 'view/multiple_comments.tpl.php';
+    }
+
+
 }
 
 

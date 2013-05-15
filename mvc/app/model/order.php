@@ -17,6 +17,7 @@ class model_order {
 
     /**
      * Loads an order by ID.
+     * @param $id ID.
      */
 
     public static function load_by_id($id) {
@@ -35,17 +36,23 @@ class model_order {
         return FALSE;
     }
 
-    // Get a contract with a specified id.
+    /**
+     * Return a contract with a specified id.
+     */
     public function get_contract() {
         return model_contract::load_by_id($this->contract_id);
     }
 
-    // Get a client with a specified id.
+    /**
+     * Return a client with a specified id.
+     */
     public function get_client() {
         return model_client::load_by_id($this->client_id);
     }
 
-    // Get all orders from db.
+    /**
+     * Return all orders from database.
+     */
     public static function get_orders() {
         $db = model_database::instance();
         $sql = 'SELECT * from orders';
@@ -86,6 +93,44 @@ class model_order {
         $db->execute($sql);
     }
 
+    /**
+     * Get all orders id with a specified product id.
+     * @param $productId Product Id.
+     */
+    public static function get_orderId_by_productId($productId){
+        $db = model_database::instance();
+        $sql = 'SELECT order_id FROM order_products WHERE product_id = ' . $productId;
+        if ($result = $db->get_rows($sql)) {
+            foreach($result as $order_id){
+                $orders_id[] = intval($order_id['order_id']);
+            }
+        return $orders_id;
+        }
+        return FALSE;
+    }
+
+    /**
+     * Return all orders that contains a list of products.
+     * @param $productIdArray Array with products ids.
+     */
+    public static function get_specificOrders($productIdArray) {
+        $db = model_database::instance();
+        $sql = "SELECT order_id FROM (SELECT * FROM order_products where";
+        foreach($productIdArray as $productId) {
+            $sql .= " product_id = ".intval($productId) . " OR ";
+        }
+        $sql = substr($sql, 0, -3);
+        $sql .= ") as tbl GROUP BY order_id HAVING count(*) = " . count($productIdArray);
+        if($result = $db->get_rows($sql)){
+            foreach($result as $orders) {
+                $ordersId[] = intval($orders['order_id']);
+            }
+            return $ordersId;
+        }
+        return FALSE;
+
+    }
+
     // Obtain all products name from db.
     public static function get_all_products() {
         $db = model_database::instance();
@@ -108,5 +153,18 @@ class model_order {
 
         return $orders;
     }
+    
+    /**
+     *
+     */
+    public static function get_orders_by_client($client){
+
+        $db = model_database::instance();
+        $sql = 'SELECT * from orders where client_id = ' . intval($client);
+        $orders = $db->get_rows($sql);
+        return $orders;
+
+    }
+
 
 }

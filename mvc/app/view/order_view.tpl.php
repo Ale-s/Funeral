@@ -21,4 +21,4 @@
     <?php } ?>
 </form>
 
-<?php @include APP_PATH . 'view/snippets/footer.tpl.php';
+<?php @include APP_PATH . 'view/snippets/footer.tpl.php'; 

@@ -30,6 +30,30 @@ class model_client {
         return FALSE;
     }
 
+    /*
+     * Loads a client by name.
+     */
+    public static function load_by_name($client_name) {
+    $db = model_database::instance();
+    $sql = 'SELECT *
+			FROM client
+			WHERE client_name = ' . mysql_real_escape_string($client_name);
+
+    if ($result = $db->get_row($sql)) {
+
+        $client = new model_client;
+        $client->id = $result['client_id'];
+        $client->name = $result['client_name'];
+        $client->pin = $result['client_pin'];
+        $client->address = $result['client_address'];
+        $client->phone = $result['client_phone'];
+
+
+    }
+    return FALSE;
+}
+
+
     /**
      * Loads all the clients.
      */

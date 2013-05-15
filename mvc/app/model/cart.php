@@ -4,12 +4,21 @@
  */
 class model_cart {
 
-    // Add a product with a specific quantity in $_SESSION['cart'].
+
+    /**
+     * Add a product with a specified quantity in $_SESSION['cart'].
+     * @param $product_id
+     * @param $quantity
+     */
     public static function add ($product_id, $quantity) {
         $_SESSION['cart'][$product_id] = $quantity;
     }
 
-    // Restore in database the old quantity when a product from $_SESSION['cart'] is deleted.
+    /**
+     * Restore in database the old quantity when a product from $_SESSION['cart'] is deleted.
+     * @param $product_id
+     * @param $quantity
+     */
     public static function resetQuantity ($product_id,$quantity) {
         $db = model_database::instance();
         $sql1 = "Select product_amount from product where product_id =". intval($product_id);
