@@ -28,7 +28,6 @@ class controller_order {
         if (isset($_POST['form']['action'])) {
 
             if(!empty($_POST['form']['name'])){
-                $form_error = TRUE;
 
 
                 $file = 'fisier.csv';
